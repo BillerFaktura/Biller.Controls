@@ -69,6 +69,7 @@
     <Compile Include="AnimatedScrollViewer.cs" />
     <Compile Include="Moveable\MoveThumb.cs" />
     <Compile Include="Moveable\ResizeThumb.cs" />
+    <Compile Include="Notification\ErrorNotification.cs" />
     <Compile Include="Notification\Notification.cs" />
     <Compile Include="Notification\NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
