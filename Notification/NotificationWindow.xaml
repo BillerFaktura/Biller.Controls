@@ -355,7 +355,7 @@
 							<TextBlock Grid.ColumnSpan="3" Text="{Binding Path=Message}" VerticalAlignment="Center" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" Foreground="White"/>
 							<Button Grid.Column="0" Grid.Row="1" Style="{StaticResource CloseButton}" Content="Änderungen" Command="{Binding Path=ChangelogCommand}"/>
 							<Button Grid.Column="1" Grid.Row="1" Style="{StaticResource CloseButton}" Content="Jetzt updaten" Command="{Binding Path=UpdateNowCommand}"/>
-							<Button Grid.Column="2" Grid.Row="1" Style="{StaticResource CloseButton}" Content="Später updaten" Command="{Binding Path=UpdateLaterCommand}"/>
+							<Button Grid.Column="2" Grid.Row="1" Style="{StaticResource CloseButton}" Content="Später updaten" Command="{Binding Path=UpdateLaterCommand}" x:Name="UpdateLaterButton"/>
 						</Grid>
                     </Grid>
                 </Border>
@@ -389,17 +389,13 @@
                                     </EasingDoubleKeyFrame.EasingFunction>
                                 </EasingDoubleKeyFrame>
                             </DoubleAnimationUsingKeyFrames>
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NotificationWindow" BeginTime="0:0:15">
-                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" >
-                                    <EasingDoubleKeyFrame.EasingFunction>
-                                        <CubicEase EasingMode="EaseInOut"/>
-                                    </EasingDoubleKeyFrame.EasingFunction>
-                                </EasingDoubleKeyFrame>
-                            </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
                 <EventTrigger RoutedEvent="Button.Click" SourceName="CloseButton">
+                    <BeginStoryboard Storyboard="{StaticResource AutoClosingStoryboard}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.Click" SourceName="UpdateLaterButton">
                     <BeginStoryboard Storyboard="{StaticResource AutoClosingStoryboard}"/>
                 </EventTrigger>
                 <Trigger SourceName="NotificationWindow" Property="Opacity" Value="0">
