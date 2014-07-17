@@ -9,8 +9,11 @@ namespace Biller.Controls.Notification
 {
     public class UpdateNotification : Notification
     {
-        public UpdateNotification(Action<object> ChangelogClick, Action<object> UpdateNowClick, Action<object> UpdateLaterClick)
+        public UpdateNotification()
             : base()
+        {  }
+
+        public void SetActions(Action<object> ChangelogClick, Action<object> UpdateNowClick, Action<object> UpdateLaterClick)
         {
             ChangelogCommand = new Biller.Controls.DelegateCommand(ChangelogClick);
             UpdateNowCommand = new Biller.Controls.DelegateCommand(UpdateNowClick);
