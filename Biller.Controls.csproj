@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimatedScrollViewer.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="Moveable\MoveThumb.cs" />
     <Compile Include="Moveable\ResizeThumb.cs" />
     <Compile Include="Notification\ErrorNotification.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Notification\NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Notification\UpdateNotification.cs" />
     <Compile Include="Office2013Button.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

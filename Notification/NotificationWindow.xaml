@@ -38,56 +38,14 @@
 		<SolidColorBrush x:Key="CloseNormal" Color="Transparent"/>
 		<SolidColorBrush x:Key="CloseOver" Color="#54FFFFFF"/>
 		<SolidColorBrush x:Key="ClosePressed" Color="White" />
-		<Style x:Key="CloseButton" TargetType="{x:Type Button}">
-			<Setter Property="SnapsToDevicePixels" Value="true"/>
-			<Setter Property="OverridesDefaultStyle" Value="true"/>
-			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
-			<Setter Property="MinHeight" Value="16"/>
-			<Setter Property="MinWidth" Value="16"/>
-			<Setter Property="Cursor" Value="Hand"/>
-			<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type Button}">
-					<Grid>
-						<Border x:Name="Border" BorderThickness="0" ClipToBounds="False" Background="{StaticResource CloseNormal}" BorderBrush="{StaticResource NormalBorderBrush}">
-							<Grid>
-								<TextBlock x:Name="TextBlock" Text="X" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
-							</Grid>
-						</Border>
-					</Grid>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource CloseOver}" />
-						</Trigger>
-						<Trigger Property="IsPressed" Value="True">
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource ClosePressed}" />
-							<Setter TargetName="TextBlock" Property="Foreground" Value="Black"/>
-						</Trigger>
-							<Trigger Property="IsKeyboardFocused" Value="true">
-							   <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DefaultedBorderBrush}" />
-							</Trigger>
-							<Trigger Property="IsDefaulted" Value="true">
-							   <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DefaultedBorderBrush}" />
-							</Trigger>
-							<Trigger Property="IsEnabled" Value="false">
-								<Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
-								<Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
-							   <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-			<Setter Property="HorizontalAlignment" Value="Stretch"/>
-		</Style>
-        <Style x:Key="NotificationButton" TargetType="{x:Type Button}">
+        <Style x:Key="CloseButton" TargetType="{x:Type Button}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
             <Setter Property="MinHeight" Value="16"/>
             <Setter Property="MinWidth" Value="16"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Content" Value="X"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -95,7 +53,7 @@
                             <Border x:Name="Border" BorderThickness="0" ClipToBounds="False" Background="{StaticResource CloseNormal}" BorderBrush="{StaticResource NormalBorderBrush}">
                                 <Grid>
                                     <TextBlock x:Name="TextBlock" Text="{TemplateBinding Content}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                                    <!--<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>-->
                                 </Grid>
                             </Border>
                         </Grid>
@@ -275,6 +233,130 @@
                         <Button x:Name="CloseButton" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" Margin="0,0,0,0" Style="{StaticResource CloseButton}" VerticalAlignment="Top" />
                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Message}"  TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" Foreground="White" 
 								   VerticalAlignment="Center"  Margin="2,2,25,4" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MinHeight="30"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <DataTemplate.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded" SourceName="NotificationWindow">
+                    <BeginStoryboard x:Name="FadeInStoryBoard">
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="NotificationWindow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="385">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <CubicEase EasingMode="EaseInOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <QuarticEase EasingMode="EaseOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="NotificationWindow" BeginTime="0:0:15">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <CubicEase EasingMode="EaseInOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="385">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <QuarticEase EasingMode="EaseOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NotificationWindow" BeginTime="0:0:15">
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" >
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <CubicEase EasingMode="EaseInOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.Click" SourceName="CloseButton">
+                    <BeginStoryboard Storyboard="{StaticResource AutoClosingStoryboard}"/>
+                </EventTrigger>
+                <Trigger SourceName="NotificationWindow" Property="Opacity" Value="0">
+                    <Setter TargetName="NotificationWindow" Property="Visibility" Value="Hidden"></Setter>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource CollapseStoryboard}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type model:UpdateNotification}">
+            <DataTemplate.Resources>
+                <Storyboard x:Key="AutoClosingStoryboard">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="NotificationWindow">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <CubicEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="385">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <QuarticEase EasingMode="EaseOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NotificationWindow" >
+                        <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0" >
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <CubicEase EasingMode="EaseInOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </DataTemplate.Resources>
+            <Grid x:Name="NotificationWindow" Tag="{Binding Path=Id}" Background="Transparent" SizeChanged="NotificationWindowSizeChanged" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,25" >
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Border Name="border" Background="#FF5195B7">
+                    <Grid Height="90" Width="385">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.RowSpan="2" Source="{Binding Path=ImageUrl}" Width="90" Height="90" ></Image>
+						<Grid Grid.Column="1" Height="37">
+							<TextBlock Text="{Binding Path=Title}"  TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" Foreground="White" 
+								   FontSize="14" FontWeight="Bold" VerticalAlignment="Center"  Margin="2,0,35,0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
+						</Grid>
+                        <Button x:Name="CloseButton" Grid.Column="1" Width="30" Height="30" HorizontalAlignment="Right" Margin="0,0,0,0" Style="{StaticResource CloseButton}" VerticalAlignment="Top"/>
+						<!--<Grid Grid.Row="1" Grid.Column="1" Margin="2,0,25,0">
+							<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Message}" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" Foreground="White" 
+								   VerticalAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MinHeight="30"/>
+						</Grid>-->
+						<Grid Grid.Row="1" Grid.Column="1" Margin="2,0,25,0" Visibility="{Binding Path=ProgressBarVisibility}">
+							<ProgressBar Grid.Row="1" Grid.Column="1" Margin="2,2,25,4" Value="{Binding Path=Progress}" MaxHeight="20"/>
+						</Grid>
+						<Grid Grid.Row="1" Grid.Column="1" Margin="2,0,25,0" Visibility="{Binding Path=TextVisibility}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="30"/>
+							</Grid.RowDefinitions>
+							<TextBlock Grid.ColumnSpan="3" Text="{Binding Path=Message}" VerticalAlignment="Center" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" Foreground="White"/>
+							<Button Grid.Column="0" Grid.Row="1" Style="{StaticResource CloseButton}" Content="Änderungen" Command="{Binding Path=ChangelogCommand}"/>
+							<Button Grid.Column="1" Grid.Row="1" Style="{StaticResource CloseButton}" Content="Jetzt updaten" Command="{Binding Path=UpdateNowCommand}"/>
+							<Button Grid.Column="2" Grid.Row="1" Style="{StaticResource CloseButton}" Content="Später updaten" Command="{Binding Path=UpdateLaterCommand}"/>
+						</Grid>
                     </Grid>
                 </Border>
             </Grid>
