@@ -376,19 +376,6 @@
                                     </EasingDoubleKeyFrame.EasingFunction>
                                 </EasingDoubleKeyFrame>
                             </DoubleAnimationUsingKeyFrames>
-
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="NotificationWindow" BeginTime="0:0:15">
-                                <EasingDoubleKeyFrame KeyTime="0" Value="0">
-                                    <EasingDoubleKeyFrame.EasingFunction>
-                                        <CubicEase EasingMode="EaseInOut"/>
-                                    </EasingDoubleKeyFrame.EasingFunction>
-                                </EasingDoubleKeyFrame>
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="385">
-                                    <EasingDoubleKeyFrame.EasingFunction>
-                                        <QuarticEase EasingMode="EaseOut"/>
-                                    </EasingDoubleKeyFrame.EasingFunction>
-                                </EasingDoubleKeyFrame>
-                            </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
