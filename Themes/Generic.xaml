@@ -130,7 +130,6 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type local:AnimatedScrollViewer}">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:AnimatedScrollViewer}">
